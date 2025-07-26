@@ -1,0 +1,551 @@
+/* === GERAL & VARIÁVEIS === */
+:root {
+    --primary-color: #007bff; /* Azul primário - cor da conscientização */
+    --secondary-color: #0056b3; /* Azul mais escuro para hover/detalhes */
+    --accent-color: #ffc107; /* Amarelo para destaque, opcional */
+    --light-blue-bg: #e6f2ff; /* Fundo azul claro para seções */
+    --text-color: #333;
+    --light-text-color: #f8f9fa;
+    --background-color: #fff;
+    --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --card-hover-shadow: 0 15px 35px rgba(0, 123, 255, 0.2);
+    --border-radius: 8px;
+    --font-primary: 'Montserrat', sans-serif;
+    --font-secondary: 'Open Sans', sans-serif;
+    --transition-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-secondary);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    overflow-x: hidden;
+    padding-top: 70px; /* Altura aproximada do header fixo */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-primary);
+    margin-bottom: 0.8em;
+    line-height: 1.2;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color var(--transition-speed) ease;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-padding {
+    padding: 60px 0;
+}
+
+.bg-light-blue {
+    background-color: var(--light-blue-bg);
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* === HEADER & NAVBAR === */
+
+.logo a {
+    font-family: var(--font-primary);
+    font-size: 1.8em; /* Mantido para caso a imagem não carregue, o texto ainda apareça bem */
+    font-weight: 700;
+    color: var(--primary-color);
+    display: inline-block; /* Para que o link se ajuste ao tamanho da imagem */
+}
+
+/* NOVO: Estilo para a imagem do logo */
+.logo img {
+    max-height: 150px; /* Ajuste a altura máxima conforme sua logo */
+    width: auto;      /* Mantém a proporção da imagem */
+    vertical-align: middle; /* Alinha a imagem verticalmente com o texto, se houver */
+}
+
+
+.logo .logo-highlight {
+    color: var(--secondary-color);
+}
+
+.main-header {
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px); /* Para Safari */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 70px; /* Altura fixa para o navbar */
+}
+
+.logo a {
+    font-family: var(--font-primary);
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.logo .logo-highlight {
+    color: var(--secondary-color);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 25px;
+}
+
+.nav-links a {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    color: var(--text-color);
+    padding: 0.5em 0;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--primary-color);
+    transition: width var(--transition-speed) ease-out;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-links a.active {
+    color: var(--primary-color);
+}
+
+/* Menu Hamburguer (CSS-Only) */
+#menu-toggle-checkbox {
+    display: none; /* Esconde o checkbox real */
+}
+
+.menu-toggle-label {
+    display: none; /* Escondido em desktop */
+    font-size: 2rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1001; /* Para ficar acima do menu quando aberto */
+}
+
+
+/* === HERO SECTION === */
+.hero {
+    background-image: linear-gradient(rgba(0, 123, 255, 0.6), rgba(0, 86, 179, 0.8)), url('../images/hero-background.jpg');
+    background-size: cover;
+    background-position: center;
+    color: var(--light-text-color);
+    min-height: calc(100vh - 70px); /* Altura da viewport menos altura do header */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    /* padding-top: 70px;  Removido pois o body já tem padding-top */
+}
+
+.hero-content {
+    z-index: 2;
+    animation: fadeInFromBottom 1s ease-out forwards;
+    max-width: 700px;
+    padding: 0 20px;
+}
+
+@keyframes fadeInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero h1 {
+    font-size: 3.5em;
+    margin-bottom: 0.3em;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+.hero p {
+    font-size: 1.3em;
+    margin-bottom: 1.5em;
+    font-family: var(--font-secondary);
+}
+
+.cta-button, .cta-button-secondary {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 15px 35px;
+    border-radius: var(--border-radius);
+    font-family: var(--font-primary);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+}
+
+.cta-button:hover {
+    background-color: var(--secondary-color);
+    color: var(--light-text-color);
+    transform: translateY(-3px) scale(1.05);
+}
+
+.cta-button-secondary {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+}
+.cta-button-secondary:hover {
+    background-color: #e0a800;
+    color: var(--text-color);
+    transform: translateY(-3px) scale(1.05);
+}
+
+.hero-shape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='1' d='M0,192L48,176C96,160,192,128,288,133.3C384,139,480,181,576,208C672,235,768,245,864,224C960,203,1056,149,1152,117.3C1248,85,1344,75,1392,69.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+/* === CONTENT SECTIONS (Genérico para páginas internas) === */
+.page-header {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 80px 0 40px; /* Mais padding superior por causa do header fixo e para dar destaque */
+    text-align: center;
+    margin-bottom: 40px; /* Espaço antes do conteúdo principal da página */
+    animation: fadeInFromTop 0.8s ease-out;
+}
+
+@keyframes fadeInFromTop {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.page-header h1 {
+    font-size: 2.8em;
+    margin-bottom: 0.2em;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+}
+
+.page-header p { /* Subtítulo opcional */
+    font-size: 1.1em;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+.content-section {
+    padding-bottom: 40px; /* Ajuste conforme necessário */
+}
+
+.content-section h2 {
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--light-blue-bg);
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+}
+
+.content-section ul {
+    list-style: disc;
+    margin-left: 20px;
+    margin-bottom: 1em;
+}
+.content-section ul li {
+    margin-bottom: 0.5em;
+}
+
+/* === INTRO SECTION & FEATURES (Home) === */
+.intro-section h2 {
+    text-align: center;
+    font-size: 2.5em;
+    color: var(--primary-color);
+    margin-bottom: 1em;
+}
+
+.intro-section .container > p {
+    text-align: center;
+    font-size: 1.1em;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3em;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.feature-card {
+    background-color: var(--background-color);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    text-align: center;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUpDelayed 0.6s ease-out forwards;
+    opacity: 0; /* Começa invisível para animação */
+}
+
+/* Animação de entrada para cards com delay */
+.feature-card:nth-child(1) { animation-delay: 0.2s; }
+.feature-card:nth-child(2) { animation-delay: 0.4s; }
+.feature-card:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes fadeInUpDelayed {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-speed) ease-in-out;
+}
+
+.feature-card:hover::before {
+    transform: scaleX(1);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.feature-icon {
+    font-size: 3em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    line-height: 1;
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.feature-card:hover .feature-icon {
+    transform: rotateY(360deg) scale(1.1);
+}
+
+.feature-card h3 {
+    font-size: 1.5em;
+    color: var(--secondary-color);
+    margin-bottom: 0.5em;
+}
+
+/* === CTA SECTION (Home) === */
+.cta-section h2 {
+    font-size: 2.2em;
+    color: var(--secondary-color);
+}
+.cta-section p {
+    font-size: 1.1em;
+    margin-bottom: 2em;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* === FOOTER === */
+.main-footer {
+    background-color: #2c3e50;
+    color: var(--light-text-color);
+    padding: 40px 0;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.main-footer p {
+    margin-bottom: 0.5em;
+}
+
+.heart-icon {
+    color: #e74c3c;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+    body {
+        padding-top: 60px; /* Ajustar para altura do navbar no mobile */
+    }
+    .navbar {
+        height: 60px; /* Altura menor no mobile */
+    }
+
+    .hero h1 {
+        font-size: 2.5em;
+    }
+    .hero p {
+        font-size: 1.1em;
+    }
+    .cta-button, .cta-button-secondary {
+        padding: 12px 25px;
+        font-size: 0.9em;
+    }
+
+    .nav-links {
+        display: flex; /* Alterado para flex para controlar o max-height */
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Abaixo do header */
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        max-height: 0; /* Começa fechado */
+        overflow: hidden;
+        transition: max-height 0.5s ease-out; /* Animação suave */
+    }
+
+    /* Quando o checkbox está marcado, o menu é exibido */
+    #menu-toggle-checkbox:checked ~ .nav-links {
+        max-height: 500px; /* Altura suficiente para mostrar todos os links */
+    }
+
+    .nav-links li {
+        margin: 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+        width: 100%;
+    }
+    .nav-links a::after {
+        display: none;
+    }
+    .nav-links a:hover {
+        background-color: var(--light-blue-bg);
+    }
+
+    .menu-toggle-label {
+        display: block; /* Mostra o label (hamburguer) */
+    }
+
+    /* Mudar o ícone do hamburguer para X quando aberto */
+    #menu-toggle-checkbox:checked + .menu-toggle-label::before {
+        content: '✕'; /* Ícone de fechar */
+    }
+    .menu-toggle-label::before {
+        content: '☰'; /* Ícone de abrir (hamburguer) */
+    }
+
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header h1 {
+        font-size: 2.2em;
+    }
+    .page-header p {
+        font-size: 1em;
+    }
+}
+
+.image-container {
+    display: flex; /* Usa Flexbox para centralizar */
+    justify-content: center; /* Centraliza horizontalmente os itens flexíveis (a imagem) */
+    align-items: center; /* Centraliza verticalmente os itens flexíveis (se necessário, dependendo da altura do container) */
+    margin-top: 5px;      /* Adiciona uma margem superior para espaçamento */
+    margin-bottom: 30px;   /* Adiciona uma margem inferior para espaçamento */
+    /* Se você quiser definir uma largura máxima para o container (opcional): */
+    /* max-width: 80%; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+}
+
+/* Estilos para a imagem dentro do container */
+.image-container img {
+    max-width: 100%;          /* Garante que a imagem não ultrapasse a largura do container pai (responsividade) */
+    height: auto;             /* Mantém a proporção da imagem */
+    border-radius: var(--border-radius); /* Adiciona bordas arredondadas (se a variável --border-radius estiver definida) */
+    box-shadow: var(--card-shadow); /* Adiciona uma sombra sutil (se a variável --card-shadow estiver definida) */
+    /* Outros estilos que você pode adicionar: */
+    /* border: 1px solid #ccc; */ /* Adiciona uma borda */
+    /* margin: 10px; */ /* Adiciona margem ao redor da imagem dentro do container */
+}
